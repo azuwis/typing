@@ -18,11 +18,6 @@ catch :finish do
           when char
             putc char
             break
-          when "\r"
-            if char == "\n"
-              puts "\n"
-              break
-            end
           end
         end
       end
