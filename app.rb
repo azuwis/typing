@@ -5,12 +5,8 @@ require 'io/console'
 class Array
   def each_overlap(slice_size, overlap)
     if block_given?
-      if slice_size > length
-        yield self
-        return
-      end
 		  i = 0
-		  while i + slice_size <= length
+		  while i < length
 		    yield slice(i...i+slice_size)
 		    i += (slice_size - overlap)
 		  end
