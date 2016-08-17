@@ -25,7 +25,7 @@ skip = 0
 skip = ARGV[2].to_i if ARGV[2]
 
 # puts "\e[H\e[2J"
-slice = IO.console.winsize[1]/2 - 3
+slice = IO.console.winsize[1]/2 - 1
 typed_chars = 0
 start_time = nil
 catch :finish do
