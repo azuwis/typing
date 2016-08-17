@@ -31,5 +31,8 @@ catch :finish do
 end
 finish_time = Time.now
 
-speed = typed_chars * 60 / (finish_time - start_time)
-puts "Result: #{typed_chars} chars, #{speed.round(2)}/m"
+if start_time
+  puts
+  speed = typed_chars * 60 / (finish_time - start_time)
+  puts "Result: #{typed_chars} chars, #{speed.round(2)}/m"
+end
