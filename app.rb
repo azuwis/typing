@@ -4,6 +4,9 @@ require 'io/console'
 
 text = open(ARGV[0]).read.strip
 
+skip = 0
+skip = ARGV[1].to_i if ARGV[1]
+
 # puts "\e[H\e[2J"
 slice = IO.console.winsize[1]/2
 typed_chars = 0
@@ -22,6 +25,10 @@ catch :finish do
             start_time = Time.now if start_time === nil
             typed_chars = typed_chars + 1
             break
+      if skip > 0
+        skip = skip - 1
+        next
+      end
           end
         end
       end
