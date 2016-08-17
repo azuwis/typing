@@ -2,6 +2,24 @@
 
 require 'io/console'
 
+class Array
+  def each_overlap(slice_size, overlap)
+    if block_given?
+      if slice_size > length
+        yield self
+        return
+      end
+		  i = 0
+		  while i + slice_size <= length
+		    yield slice(i...i+slice_size)
+		    i += (slice_size - overlap)
+		  end
+    else
+      to_enum(:each_overlap, slice_size, overlap)
+    end
+  end
+end
+
 text = open(ARGV[0]).read.strip
 
 repeat = 1
@@ -16,14 +34,15 @@ typed_chars = 0
 start_time = nil
 catch :finish do
   text.split.each do |line|
-    line.chars.each_slice(slice) do |breaked_line|
+    line.chars.each_overlap(slice, 1) do |breaked_line|
       if skip > 0
         skip = skip - 1
         next
       end
       repeat.times do
         puts breaked_line.join
-        breaked_line.each do |char|
+        breaked_line.each_with_index do |char, index|
+          break if index == slice - 1 and line.size > slice
           while input = STDIN.getch do
             case input
             when "\u0003"
