@@ -40,7 +40,12 @@ catch :finish do
         next
       end
       repeat.times do
-        puts breaked_line.join
+        if line.size > slice
+          print breaked_line[0..-2].join
+          puts "  #{breaked_line[-1]}"
+        else
+          puts breaked_line.join
+        end
         breaked_line.each_with_index do |char, index|
           break if index == slice - 1 and line.size > slice
           while input = STDIN.getch do
