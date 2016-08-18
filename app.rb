@@ -30,19 +30,19 @@ typed_chars = 0
 start_time = nil
 catch :finish do
   text.split.each do |line|
-    line.chars.each_overlap(slice, 1) do |breaked_line|
+    line.chars.each_overlap(slice, 1) do |wrap|
       if skip > 0
         skip = skip - 1
         next
       end
       repeat.times do
         if line.size > slice
-          print breaked_line[0..-2].join
-          puts "  #{breaked_line[-1]}"
+          print wrap[0..-2].join
+          puts "  #{wrap[-1]}"
         else
-          puts breaked_line.join
+          puts wrap.join
         end
-        breaked_line.each_with_index do |char, index|
+        wrap.each_with_index do |char, index|
           break if index == slice - 1 and line.size > slice
           while input = STDIN.getch do
             case input
