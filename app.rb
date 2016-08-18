@@ -58,6 +58,7 @@ catch :finish do
         end
         puts
       end
+      puts '-' * IO.console.winsize[1]
     end
   end
 end
