@@ -58,7 +58,10 @@ catch :finish do
         end
         puts
       end
-      puts '-' * IO.console.winsize[1]
+      speed = typed_chars * 60 / (Time.now - start_time)
+      stat = " #{typed_chars} chars, #{speed.round(2)}/m"
+      print '-' * (IO.console.winsize[1] - stat.size)
+      puts stat
     end
   end
 end
